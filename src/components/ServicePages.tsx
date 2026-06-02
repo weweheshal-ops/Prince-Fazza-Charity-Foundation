@@ -1082,7 +1082,9 @@ export const ServicePages: React.FC<ServicePagesProps> = ({ activePage, lang, op
                     className="p-5 bg-emerald-500/5 hover:bg-emerald-500/10 border border-emerald-500/10 rounded-2xl space-y-2 text-left transition duration-300 group"
                   >
                     <div className="flex items-center space-x-2.5 text-emerald-600 font-bold text-xs uppercase font-mono">
-                      <MessageSquare className="w-4 h-4 fill-emerald-100" />
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                        <path d="M12.031 2a9.967 9.967 0 0 0-9.969 9.969c0 1.944.556 3.766 1.516 5.313L2 22l4.897-1.288a9.907 9.907 0 0 0 5.134 1.419h.005a9.969 9.969 0 0 0 9.969-9.97c0-2.662-1.037-5.164-2.922-7.049A9.904 9.904 0 0 0 12.031 2zm5.82 14.24c-.24.675-1.18 1.242-1.635 1.282-.415.035-.95.045-1.525-.14a9.7 9.7 0 0 1-3.645-2.26 10.669 10.669 0 0 1-2.52-3.155A5.672 5.672 0 0 1 7.5 9.385c.015-1.115.59-1.69 1.06-2.15.175-.17.39-.215.535-.21h.39c.125 0 .285-.01.445.37.17.405.58 1.42.63 1.525.05.105.08.23.01.37s-.105.23-.21.35c-.105.125-.22.28-.315.375-.105.105-.215.22-.095.425a8.3 8.3 0 0 0 1.52 1.885c.67.6 1.23.99 1.84 1.295.2.1.375.05.515-.1.175-.185.76-.875.965-1.175.2-.3.41-.25.685-.15.275.1.1.84 1.76.92.155.03.31.06.46.06.395 0 .61-.19.705-.33.28-.415.42-.92.18-1.595z" />
+                      </svg>
                       <span>Direct WhatsApp Hotline</span>
                     </div>
                     <p className="text-[11px] text-slate-500 leading-normal font-semibold">Immediate access to administrative coordinators on status verification, sponsorships, and clinical dispatches.</p>
