@@ -1310,7 +1310,7 @@ Thank you.`;
                 <div className="w-16 h-[2px] bg-[#F4511E] mx-auto drop-shadow"></div>
               </div>
               
-              <div className="text-[13px] md:text-[14px] text-gray-200 leading-relaxed max-w-3xl mx-auto font-light drop-shadow-md space-y-4">
+              <div className="text-[15.5px] md:text-[17.5px] text-gray-100 leading-relaxed md:leading-[1.75] max-w-3xl mx-auto font-normal drop-shadow-md space-y-5">
                 <p>
                   Children facing vulnerability often encounter barriers that limit access to healthcare, education, protection, and essential support services. Through compassionate action and sustainable community programs, the Prince Fazza Charity Foundation works to ensure that every child has the opportunity to grow in a safe, nurturing, and supportive environment.
                 </p>
