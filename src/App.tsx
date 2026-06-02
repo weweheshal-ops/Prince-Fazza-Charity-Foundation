@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { ActivePage, Program, Comment, BlogItem } from "./types";
 import { Navbar } from "./components/Navbar";
 import { ServicePages } from "./components/ServicePages";
+import { GlobalVoices } from "./components/GlobalVoices";
 import { PremiumDonateButton } from "./components/PremiumDonateButton";
 import { translate, translateParagraph, TOP_LANGUAGES } from "./translation";
 import childrenPlayingImg from "./assets/images/children_playing_field_1780309954729.png";
@@ -26,6 +27,7 @@ import {
   FAQS, 
   COMMENTS 
 } from "./data";
+import { GLOBAL_VOICES_MESSAGES } from "./data_global_voices";
 import { 
   Heart, 
   Sparkles, 
@@ -97,7 +99,7 @@ const getPageHeaderInfo = (page: ActivePage): { img: string; tag: string; title:
       };
     case "founder-chronicle":
       return {
-        img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1600",
+        img: "https://i.imgur.com/RBHsnQY.png",
         tag: "THE FOUNDER'S CHRONICLE",
         title: "Founder's Chronicle",
         sub: "Official record of humanitarian leadership, global philanthropy, sustainable giving initiatives, and international social impact under the guidance of Sheikh Hamdan bin Mohammed bin Rashid Al Maktoum (Fazza)."
@@ -199,6 +201,13 @@ const getPageHeaderInfo = (page: ActivePage): { img: string; tag: string; title:
         tag: "OFFICIAL PRESS OFFICE",
         title: "Fazza Chronicles & Field Briefs",
         sub: "Certified field bulletins, financial audit publications, oncology triumph narratives, and regional transition reports."
+      };
+    case "global-voices":
+      return {
+        img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1600",
+        tag: "COMMUNITY CORNER",
+        title: "Global Voices",
+        sub: "Messages of Hope, Gratitude, and Humanitarian Impact from Around the World."
       };
     case "campaigns":
     case "emergency-relief":
@@ -319,20 +328,54 @@ function toTitleCase(str: string) {
 
 const PageHeader: React.FC<{ page: ActivePage; lang: string }> = ({ page, lang }) => {
   const info = getPageHeaderInfo(page);
+  const isFounderChronicle = page === "founder-chronicle";
+
   return (
     <div className="w-full font-sans bg-slate-50">
       {/* Cinematic premium hero image/banner with Title */}
       <div className="relative w-full h-[300px] md:h-[450px] overflow-hidden bg-zinc-900 group">
-        <img 
-          src={info.img} 
-          alt={info.title} 
-          referrerPolicy="no-referrer"
-          onError={(e) => {
-            e.currentTarget.onerror = null;
-            e.currentTarget.src = "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1600&q=80"; // Reliable fallback
-          }}
-          className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[10000ms] group-hover:scale-105 ease-out select-none"
-        />
+        {isFounderChronicle ? (
+          <div 
+            className="absolute inset-0 flex h-full animate-scroll-right"
+            style={{ width: "200%" }}
+          >
+            <div className="w-1/2 h-full relative flex-shrink-0">
+              <img 
+                src={info.img} 
+                alt={info.title} 
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1600&q=80";
+                }}
+                className="absolute inset-0 w-full h-full object-cover select-none"
+              />
+            </div>
+            <div className="w-1/2 h-full relative flex-shrink-0">
+              <img 
+                src={info.img} 
+                alt={info.title} 
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1600&q=80";
+                }}
+                className="absolute inset-0 w-full h-full object-cover select-none"
+              />
+            </div>
+          </div>
+        ) : (
+          <img 
+            src={info.img} 
+            alt={info.title} 
+            referrerPolicy="no-referrer"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1600&q=80"; // Reliable fallback
+            }}
+            className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[10000ms] group-hover:scale-105 ease-out select-none"
+          />
+        )}
         {/* Soft dark overlay only for readability */}
         <div className="absolute inset-0 bg-black/20" />
         
@@ -1101,7 +1144,7 @@ Thank you.`;
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               <div className="relative">
-                <img src={happyChildrenPlaying} alt="Children playing outdoors" className="w-full h-auto object-cover rounded-sm shadow-md cursor-pointer hover:opacity-95 transition-opacity" onClick={() => handlePageChange("about")} />
+                <img src="https://i.imgur.com/U4lkS8K.png" alt="Children playing outdoors" className="w-full h-auto object-cover rounded-sm shadow-md cursor-pointer hover:opacity-95 transition-opacity" onClick={() => handlePageChange("about")} />
               </div>
               
               <div className="space-y-6">
@@ -3261,6 +3304,12 @@ Thank you.`;
           )}
 
         </div>
+      )}
+
+
+      {/* GLOBAL VOICES VIEW */}
+      {activePage === "global-voices" && (
+        <GlobalVoices />
       )}
 
 

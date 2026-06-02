@@ -52,12 +52,13 @@ export const Navbar: React.FC<NavbarProps> = ({
   
   // Menu visibility states
   const [showLanguageDropdown, setShowLanguageDropdown] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<"about" | "services" | "join" | null>(null);
+  const [activeDropdown, setActiveDropdown] = useState<"about" | "services" | "join" | "news" | null>(null);
   
   // Mobile accordions
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileJoinOpen, setMobileJoinOpen] = useState(false);
+  const [mobileNewsOpen, setMobileNewsOpen] = useState(false);
 
   // Search overlay states
   const [searchOpen, setSearchOpen] = useState(false);
@@ -303,17 +304,50 @@ export const Navbar: React.FC<NavbarProps> = ({
                 )}
               </div>
 
-              {/* 2. LATEST NEWS */}
-              <button
-                onClick={() => handleLinkClick("newsroom")}
-                className={`text-[11px] uppercase tracking-widest font-black px-3.5 py-2 rounded-full transition-all outline-none ${
-                  activePage === "newsroom"
-                    ? "text-[#F4511E] bg-[#F4511E]/5"
-                    : "text-slate-800 hover:text-[#F4511E] hover:bg-slate-50"
-                }`}
+              {/* 2. NEWS DROPDOWN */}
+              <div 
+                className="relative"
+                onMouseEnter={() => setActiveDropdown("news")}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
-                {translate("latest_news", lang)}
-              </button>
+                <button
+                  onClick={() => handleLinkClick("newsroom")}
+                  className={`text-[11px] uppercase tracking-widest font-black px-3.5 py-2 rounded-full flex items-center space-x-1.5 transition-all outline-none ${
+                    activePage === "newsroom" || activePage === "global-voices"
+                      ? "text-[#F4511E] bg-[#F4511E]/5"
+                      : "text-slate-800 hover:text-[#F4511E] hover:bg-slate-50"
+                  }`}
+                >
+                  <span>{translate("news", lang)}</span>
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === "news" ? "rotate-180" : ""}`} />
+                </button>
+
+                {/* News Dropdown Panel */}
+                {activeDropdown === "news" && (
+                  <div className="absolute left-1/2 -translate-x-1/2 mt-1 w-[460px] grid grid-cols-2 gap-3 bg-white/95 backdrop-blur-xl border border-slate-100 rounded-2xl shadow-2xl p-4 z-50 animate-fade-in">
+                    <button 
+                      onClick={() => handleLinkClick("newsroom")}
+                      className="w-full text-left p-3 rounded-xl hover:bg-[#F4511E]/5 hover:text-[#F4511E] transition-all flex items-center justify-between group"
+                    >
+                      <div>
+                        <span className="block text-xs font-black text-slate-900 group-hover:text-[#F4511E]">{translate("news_and_updates", lang)}</span>
+                        <span className="block text-[10px] text-slate-400 font-medium">Foundation chronicles</span>
+                      </div>
+                      <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#F4511E]" />
+                    </button>
+                    <button 
+                      onClick={() => handleLinkClick("global-voices")}
+                      className="w-full text-left p-3 rounded-xl hover:bg-[#F4511E]/5 hover:text-[#F4511E] transition-all flex items-center justify-between group"
+                    >
+                      <div>
+                        <span className="block text-xs font-black text-slate-900 group-hover:text-[#F4511E]">{translate("global_voices", lang)}</span>
+                        <span className="block text-[10px] text-slate-400 font-medium">Messages of hope & impact</span>
+                      </div>
+                      <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#F4511E]" />
+                    </button>
+                  </div>
+                )}
+              </div>
 
               {/* 3. OUR SERVICES */}
               <div 
@@ -633,13 +667,32 @@ export const Navbar: React.FC<NavbarProps> = ({
                   )}
                 </div>
 
-                {/* 2. LATEST NEWS */}
-                <button
-                  onClick={() => handleLinkClick("newsroom")}
-                  className="w-full text-left py-3 px-4 rounded-xl text-xs font-black uppercase tracking-widest text-slate-900 bg-slate-50 hover:bg-slate-100/70 block"
-                >
-                  {translate("latest_news", lang)}
-                </button>
+                {/* 2. NEWS Accordion */}
+                <div className="space-y-2">
+                  <button 
+                    onClick={() => setMobileNewsOpen(!mobileNewsOpen)}
+                    className="w-full flex items-center justify-between py-3 px-4 rounded-xl text-xs font-black uppercase tracking-widest text-slate-900 bg-slate-50 hover:bg-slate-100/70"
+                  >
+                    <span>{translate("news", lang)}</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${mobileNewsOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {mobileNewsOpen && (
+                    <div className="pl-4 pr-2 py-1 space-y-1.5 border-l-2 border-slate-100 grid grid-cols-1 gap-1">
+                      <button 
+                        onClick={() => handleLinkClick("newsroom")}
+                        className="w-full text-left py-2 text-xs font-extrabold text-slate-600 hover:text-[#F4511E] truncate block text-left"
+                      >
+                        • {translate("news_and_updates", lang)}
+                      </button>
+                      <button 
+                        onClick={() => handleLinkClick("global-voices")}
+                        className="w-full text-left py-2 text-xs font-extrabold text-slate-600 hover:text-[#F4511E] truncate block text-left"
+                      >
+                        • {translate("global_voices", lang)}
+                      </button>
+                    </div>
+                  )}
+                </div>
 
                 {/* 3. OUR SERVICES Accordion */}
                 <div className="space-y-2">

@@ -11,6 +11,7 @@ export type ActivePage =
   | "stories"
   | "blog"
   | "newsroom"
+  | "global-voices"
   | "events"
   | "gallery"
   | "videos"
